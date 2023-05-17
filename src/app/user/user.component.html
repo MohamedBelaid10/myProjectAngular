@@ -1,36 +1,113 @@
 
-<hr>
 
-<h3>List of Users</h3>
-<hr>
-
-<div class="container">
-    <input
-    type="text"
-    class="form-control"
-    placeholder="Search..."
-    name="term"
-    [(ngModel)]="term"
-  />
-
-  <table class="table table-striped table-hover table-sm">
+<div class="container  ">
+  
+  <br>
+  <input type="text" class="form-control"  placeholder="Search..." name="term" [(ngModel)]="term" />
+  <br>
+  <table class="table table-hover table-striped ">
     <thead class="thead-dark">
       <tr>
-        <th>#</th>
+        <th>ID</th>
         <th>Name</th>
         <th>Username</th>
         <th>Email</th>
         <th>Address</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let a of users | filter: term" (dblclick)="navigateToUserComponent(a)">
+      <tr *ngFor="let a of users | filter: term" (dblclick)="navigateToUserComponent(a)" >
         <td>{{ a.id }}</td>
         <td>{{ a.name }}</td>
         <td>{{ a.username }}</td>
         <td>{{ a.email }}</td>
-        <td>{{ a.address.street }}</td>
+        <td>{{ a.address?.street }}</td>
+        <td>
+          <a class="btn btn-danger " (click)="deleteUser(a)">Remove</a>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<br>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ADD USER DATA</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="utilisateurForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter Name">
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label">UserName</label>
+              <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter UserName">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="name@example.com">
+            </div>
+            <h3>Address</h3>
+            <div class="mb-3">
+              <label for="street" class="form-label">Street</label>
+              <input type="text" class="form-control" id="street" formControlName="street" placeholder="Enter Street">
+            </div>
+            <div class="mb-3">
+              <label for="zipcode" class="form-label">ZipCode</label>
+              <input type="text" class="form-control" id="zipcode" formControlName="zipcode" placeholder="Enter ZipCode">
+            </div>
+            <div class="mb-3">
+              <label for="city" class="form-label">City</label>
+              <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter City">
+            </div>
+            <h4>Geo</h4>
+            <div class="mb-3">
+              <label for="lat" class="form-label">Latitude</label>
+              <input type="text" class="form-control" id="lat" formControlName="lat" placeholder="Enter latitude">
+            </div>
+            <div class="mb-3">
+              <label for="lng" class="form-label">Longitude</label>
+              <input type="text" class="form-control" id="lng" formControlName="lng" placeholder="Enter longitude">
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Enter Number Phone">
+            </div>
+            <div class="mb-3">
+              <label for="website" class="form-label">Web Site</label>
+              <input type="text" class="form-control" id="website" formControlName="website" placeholder="Enter web site">
+            </div>
+            <h4>Company</h4>
+            <div class="mb-3">
+              <label for="companyName" class="form-label">Name Company</label>
+              <input type="text" class="form-control" id="companyName" formControlName="names" placeholder="Enter name company">
+              </div>
+              <div class="mb-3">
+              <label for="catchPhrase" class="form-label">CatchPhrase</label>
+              <input type="text" class="form-control" id="catchPhrase" formControlName="catchPhrase" placeholder="Enter catchPhrase">
+              </div>
+              <div class="mb-3">
+              <label for="bs" class="form-label">Bs</label>
+              <input type="text" class="form-control" id="bs" formControlName="bs" placeholder="Enter Bs">
+              </div>
+              </form>
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="saveUser()">Save</button>
+              </div>
+              </div>
+              
+                </div>
+              </div>
+  
